@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+	
+<style>
+
+* {
+  padding:0;
+  margin: 0;
+}
+
+.header-title {
+  border-bottom: 1px solid red;
+  
+}
+
+.flex-item.menu .name {
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+.flex-item.menu * {
+  padding: 7px 10px;
+}
+
+.flex-item.menu ul {
+  list-style-type: none;
+}
+
+/*Flex Styles*/
+.flex-container {
+  display: flex;
+  height: 100vh;
+  
+}
+
+.flex-item {
+  padding: 10px;
+}
+.flex-item.menu{
+  background-color: #0A0E65;
+  color: #ffffff;
+  width: 20%;
+}
+.flex-item.main-content{
+  flex:2;
+  background-color: #F4F3F8;
+}
+
+.inner-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.inner-item {
+  flex: 1 1 25%;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  margin: 10px;
+/*   padding: 10px; */
+  box-shadow: 0px 0px 3px 0px #5E5E5E
+}
+
+.inner-item-table:first-child {
+  font-weight: bold;
+}
+
+.inner-item  .inner-item-table{
+/*   flex: auto; */
+  list-style-type: none;
+  flex-basis: 100%;
+  display: flex;
+  padding: 15px 10px;
+}
+
+.inner-item-table li:nth-child(2)  {
+  margin-left: auto;
+}
+
+.inner-item  li a {
+  text-decoration: none;
+}
+
+.inner-item .inner-item-table {
+  border-bottom: 1px solid #F0F0F0;
+}
+.inner-item .header-two {
+  color: #a7a7a7;
+  font-size: 11px;
+  text-transform: uppercase;
+ 
+}
+
+.inner-item-table.second-row {
+   background-color: #FBFBFB;
+}
+
+.inner-item-table .site-name {
+  color: #5431ED;
+}
+
+.inner-item-table .visits {
+  color: #898888;
+}
+</style>
+</head>
+
+<body>
+
+ <div class="flex-container">
+  <div class="flex-item menu">
+    <h2>
+     STAR
+    </h2>
+    <p class="name">Surendra Katuwal</p>
+    <ul>
+      <li>Dashboard</li>
+      <li>Sites</li>
+      <li>Migrations</li>
+      <li>Analytics</li>
+      <li>Billing</li>
+      <li>Users</li>
+      <li>Activity Log</li>
+      <li>Knowledge Base</li>
+    </ul>
+  </div>
+  <div class="flex-item main-content">
+    <h2>Dashboard</h2>
+    <div class="inner-container">
+   
+        <div class="inner-item">
+          <div class="inner-item-table header">
+          <li><span>Your sites</span></li>
+          <li><a href="#">View All </a></li>
+          </div>
+          <div class="inner-item-table second-row">
+            <li class="header-two">Name</li>
+          <li class="header-two"><span>Visits</span></li>
+          </div>
+          <div class="inner-item-table">
+          <li class="site-name">ABC Corporation</li>
+          <li class="visits"><span>6,589</span></li>
+          </div>
+          <div class="inner-item-table">
+            <li class="site-name">woocommerce</li>
+            <li class="visits"><span>25,500</span></li>
+          </div>
+          <div class="inner-item-table">
+            <li class="site-name">personalBlog</li>
+            <li class="visits"><span>2,500</span></li>
+          </div>
+      </div>
+      <div class="inner-item">
+        <div class="inner-item-table">
+        <li>Resource usage</li>
+        <li><span>May 26 - Jun 26</span></li>
+        </div>
+        
+      </div>
+      <div class="inner-item">
+        <div class="inner-item-table">
+            <li>Your invoices</li>
+            <li><span>View All</span></li>
+        </div>
+        <div class="inner-item-table second-row">
+            <li class="header-two">Date</li>
+          <li class="header-two"><span>Total</span></li>
+          </div>
+        <div class="inner-item-table">
+            <li>April 26, 2019</li>
+            <li><span>0 USD</span></li>
+         </div>
+         <div class="inner-item-table">
+            <li>March 26, 2019</li>
+            <li><span>0 USD</span></li>
+         </div>
+         <div class="inner-item-table">
+            <li>Feb 26, 2019</li>
+            <li><span>0 USD</span></li>
+         </div>
+      </div>
+      <div class="inner-item">
+        <div class="inner-item-table">
+          <li>Data Transfer</li>
+          <li><span>Jun 15 - Jun 21</span></li>
+        </div>
+         <div class="inner-item-table">
+          <div id="curve_chart"></div>
+        </div> 
+      </div>
+      <div class="inner-item">
+        <div class="inner-item-table">
+        <li>Unique Visits</li>
+        <li><span>Jun 15 - Jun 21</span></li>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- line graph -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales'],
+          ['Fri',  1000],
+          ['Sat',  1170],
+          ['Sun',  660],
+          ['Mon',  1030]
+        ]);
+
+        var options = {
+          title: '10.32 GB',
+          curveType: 'function',
+          
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+	
+</body>
+</html>
+<!--https://www.impressivewebs.com/animate-display-block-none/-->
